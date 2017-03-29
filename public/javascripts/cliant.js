@@ -1,7 +1,7 @@
 /**
  * Created by b1016126 on 2017/03/29.
  */
-var socketio = io.connect('http://localhost:8000');
+var socketio = io.connect('http://ptpchat.herokuapp.com/'||'http://localhost:8000');
 
 socketio.on("connected", function(name) {});
 socketio.on("publish", function (data) { addMessage(data.value); });
