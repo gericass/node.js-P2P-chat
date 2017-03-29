@@ -1,0 +1,87 @@
+doctype html
+html
+  head
+    title= title
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+    style.
+      html {
+      height: 100%;
+      margin: 0;
+      }
+      body {
+      margin: 0;
+      padding-bottom: 20px;
+      padding-top: 50px;
+      }
+      body, .item {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      height: 100%;
+      overflow: auto;
+      }
+      #header {
+       background-color: #ccc;
+       position: fixed;            /* ヘッダーの固定 */
+       top: 0px;                   /* 位置(上0px) */
+       left: 0px;                  /* 位置(右0px) */
+       width: 100%;                /* 横幅100%　*/
+       height: 45px;              /* 縦幅140px */
+       z-index: 5;
+       box-shadow:2px 2px 1px #b4bfc1;
+      }
+      #head-txt{
+           /* 表示領域を白枠で囲う */
+       height: 100%;              /* 縦の表示領域はheader-bkと同じ */
+       width: 960px;              /* 横の幅970px */
+       margin: auto;              /* 中央揃え */
+       text-align: center;
+       z-index: 5;
+       padding: 13px;
+      }
+
+      #footer {
+      background-color: #ccc;
+      bottom: 0;
+      height: 40px;
+      overflow: hidden;
+      position: absolute;
+
+      width: 80%;
+
+      }
+      #middle {
+      }
+      #left_frame {
+      float: left;
+      width: 20%;
+      }
+      #right_frame {
+      }
+      .spacer {
+      height: 10000px;
+      }
+      #in {
+      position: relative;
+      left: 200px;
+      }
+
+  body
+    block content
+
+    #header.item
+     #head-pos
+      #head-txt ここだよ
+
+    #middle.item
+      #left_frame.item
+        | 左フレーム（スクロール）
+        .spacer
+      #right_frame.item
+         #msg
+         script(src='/socket.io/socket.io.js')
+         script(src='/javascripts/cliant.js')
+
+         #footer.item
+           #in
+             input#msg_input(type='text', style='width:500px;')
+             input#sub(type="submit",value="送信")

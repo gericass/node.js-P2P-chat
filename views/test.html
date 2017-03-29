@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yes</title>
+    <style>
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding-bottom: 20px;
+            padding-top: 50px;
+        }
+
+        body, .item {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 100%;
+            overflow: auto;
+        }
+
+        #header {
+            background-color: #ccc;
+            height: 50px;
+            margin-top: -50px;
+            padding: 5px;
+        }
+
+        #footer {
+            background-color: #ccc;
+            bottom: 0;
+            height: 20px;
+            overflow: hidden;
+            position: absolute;
+            width: 100%;
+        }
+
+        #middle {
+        }
+
+        #left_frame {
+            float: left;
+            width: 20%;
+        }
+
+        #right_frame {
+        }
+
+        .spacer {
+            height: 10000px;
+        }
+    </style>
+</head>
+<body>
+<div id="header" class="item">ヘッダー（固定）</div>
+<div id="footer" class="item">フッター（固定）</div>
+<div id="middle" class="item">
+    <div id="left_frame" class="item">
+        左フレーム（スクロール）
+        <div class="spacer"></div>
+    </div>
+    <div id="right_frame" class="item">
+        右フレーム（スクロール）
+        <div class="spacer"></div>
+    </div>
+</div>
+
+
+</body>
+</html>
