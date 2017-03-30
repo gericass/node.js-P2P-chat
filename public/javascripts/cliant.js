@@ -20,9 +20,11 @@ function publishMessage() {
 }
 
 function addMessage (msg) {
-    var domMeg = document.createElement('div');
-    domMeg.innerHTML = new Date().toLocaleTimeString() + ' ' + msg;
-    msgArea.appendChild(domMeg);
+    $('<li class="user">'+msg+'</li>').appendTo('ul');
+
+    //var domMeg = document.createElement('div');
+    //domMeg.innerHTML = new Date().toLocaleTimeString() + ' ' + msg;
+    //msgArea.appendChild(domMeg);
 }
 
 
@@ -33,11 +35,27 @@ $(function(){
         $('#msg_input').val('');
         return false;
     });
+
+    $('[data-remodal-id=modal]').remodal().open();
+
+    $('#user-ok').click(function(){
+        socketio.emit("publish",{ value:$('#modal1Desc').val()});
+        $('#modal1Desc').val('');
+        $('[data-remodal-id=modal]').remodal().close();
+        return false;
+    });
+    $('#user-cancel').click(function(){
+       // socketio.emit("publish",{ value:$('#modal1Desc').val()});
+        $('#modal1Desc').val('');
+        return false;
+    });
+
 });
 
 
 // 3.開始処理
-var msgArea = document.getElementById("msg");
-var myName = Math.floor(Math.random()*100) + "さん";
-addMessage("貴方は" + myName + "として入室しました");
-start(myName);
+
+//var msgArea = document.getElementById("msg");
+//var myName = Math.floor(Math.random()*100) + "さん";
+//addMessage("貴方は" + myName + "として入室しました");
+//start(myName);

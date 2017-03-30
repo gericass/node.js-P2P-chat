@@ -3,6 +3,9 @@ html
   head
     title= title
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+    link(rel='stylesheet', href='/stylesheets/remodal.css')
+    link(rel='stylesheet', href='/stylesheets/remodal-default-theme.css')
+    script(src='/javascripts/remodal.js')
     style.
       html {
       height: 100%;
@@ -62,20 +65,34 @@ html
       position: relative;
       left: 200px;
       }
+      #user-list{
+      padding: 0;
+      position: relative;
+      }
+      li.user{
+      color: #2d8fdd;
+      border-left: solid 6px #2d8fdd;/*左側の線*/
+      background: #f1f8ff;/*背景色*/
+      margin-bottom: 3px;/*下のバーとの余白*/
+      line-height: 3;
+      padding: 0.5em;
+      list-style-type: none!important;/*ポチ消す*/
+      }
 
   body
-    block content
 
+    block content
     #header.item
      #head-pos
       #head-txt ここだよ
 
     #middle.item
       #left_frame.item
-        | 左フレーム（スクロール）
+        ul#user-list
+
+
         .spacer
       #right_frame.item
-         #msg
          script(src='/socket.io/socket.io.js')
          script(src='/javascripts/cliant.js')
 
@@ -83,3 +100,13 @@ html
            #in
              input#msg_input(type='text', style='width:500px;')
              input#sub(type="submit",value="送信")
+
+
+
+    .remodal(data-remodal-id='modal', role='dialog', aria-labelledby='modal1Title', aria-describedby='modal1Desc')
+      div
+        h2#modal1Title ユーザー名を設定してください
+        input#modal1Desc(type='text',style='width:400px;')
+      br
+      button#user-cancel.remodal-cancel(data-remodal-action='cancel') Cancel
+      button#user-ok.remodal-confirm(data-remodal-action='confirm') OK

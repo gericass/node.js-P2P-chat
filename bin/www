@@ -114,13 +114,14 @@ io.sockets.on("connection", function (socket) {
 
     // 接続開始カスタムイベント(接続元ユーザを保存し、他ユーザへ通知)
     socket.on("connected", function (name) {
-        var msg = name + "が入室しました";
-        userHash[socket.id] = name;
-        io.sockets.emit("publish", {value: msg});
+        //var msg = name + "が入室しました";
+        //userHash[socket.id] = name;
+        //io.sockets.emit("publish", {value: msg});
     });
 
     // メッセージ送信カスタムイベント
     socket.on("publish", function (data) {
+        userHash[socket.id] = data;
         io.sockets.emit("publish", {value:data.value});
     });
 
