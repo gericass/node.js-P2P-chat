@@ -23,8 +23,8 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app).listen(process.env.PORT || port,function(){
-    console.log("Express server listening on port 8000");
+var server = http.createServer(app).listen(process.env.PORT || 8000,function(){
+    console.log("Express server listening on port "+port);
 });
 
 /**
@@ -109,28 +109,60 @@ var io = require("socket.io").listen(server);
 // ユーザ管理ハッシュ
 var userHash = {};
 
+var username = {};
+var peerid = {};
+var socketid = [];
+
 // 2.イベントの定義
 io.sockets.on("connection", function (socket) {
 
     // 接続開始カスタムイベント(接続元ユーザを保存し、他ユーザへ通知)
     socket.on("connected", function (name) {
-        //var msg = name + "が入室しました";
-        //userHash[socket.id] = name;
-        //io.sockets.emit("publish", {value: msg});
+        var msg = name + "が入室しました";
+        userHash[socket.id] = name;
+        io.sockets.emit("publish", {value: msg});
     });
+
 
     // メッセージ送信カスタムイベント
     socket.on("publish", function (data) {
-        userHash[socket.id] = data;
-        io.sockets.emit("publish", {value:data.value});
+        io.sockets.emit("publish", {name: data.value ,id: socket.id});
     });
+
+
+    socket.on("save", function (data) {//モーダルウィンドウOK押下時
+        username[socket.id] = data.name;
+        peerid[socket.id] = data.peerid;
+        socketid.push(socket.id);
+        io.sockets.emit("publish", {name: data.name,id: socket.id});
+    });
+
+    socket.on("idconfirm",function(data){//peerid入力時
+        if(data.pid==peerid[data.soc]){
+            io.sockets.to(socket.id).emit("CON",{un:username[data.soc],pi:data.pid,me:username[socket.id],shitai:data.soc});
+        }
+    });
+
+    socket.on("render",function(){//接続中ユーザー情報を送信
+       io.sockets.to(socket.id).emit("render",{un:username,si:socketid})
+    });
+
+
 
     // 接続終了組み込みイベント(接続元ユーザを削除し、他ユーザへ通知)
     socket.on("disconnect", function () {
-        if (userHash[socket.id]) {
-            var msg = userHash[socket.id] + "が退出しました";
-            delete userHash[socket.id];
-            io.sockets.emit("publish", {value: msg});
-        }
+        //if (username[socket.id]) {
+            //var msg = username[socket.id] + "が退出しました";
+            delete username[socket.id];
+            delete peerid[socket.id];
+            for(var i=0; i<socketid.length; i++){
+                if(socketid[i] == socket.id){
+                    socketid.splice(i, 1);
+                }
+            }
+            //delete socketid[socket.id];
+            io.sockets.emit("user-out",socket.id);
+        //}
     });
+
 });

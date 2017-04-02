@@ -6,7 +6,101 @@ html
     link(rel='stylesheet', href='/stylesheets/remodal.css')
     link(rel='stylesheet', href='/stylesheets/remodal-default-theme.css')
     script(src='/javascripts/remodal.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/javascripts/cliant.js')
+    script(type='text/javascript', src='https://skyway.io/dist/0.3/peer.js')
+
     style.
+      body {font-family: "Meiryo UI"}
+
+      /*******************************
+      * 左からの吹き出し
+      ********************************/
+      .other {
+          position: relative;
+          background: #fff;
+          border: 1px solid #777;
+          margin: 10px;
+          padding: 10px;
+          border-radius: 15px;
+          margin-right: 20%;
+          clear: both;
+          max-width: 500px;
+          float: left;
+          list-style-type: none
+      }
+      .other:after,
+      .other:before {
+          right: 100%;
+          top: 50%;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+      }
+      .other:after {
+          border-color: rgba(255, 255, 255, 0);
+          border-right-color: #fff;
+          border-width: 7px;
+          margin-top: -7px;
+      }
+      .other:before {
+          border-color: rgba(0, 0, 0, 0);
+          border-right-color: #000;
+          border-width: 8px;
+          margin-top: -8px;
+      }
+
+      /*******************************
+      * 右からの吹き出し
+      ********************************/
+      .you {
+          position: relative;
+          background: #85e249;
+          border: 1px solid #777;
+          margin: 10px;
+          padding: 10px;
+          border-radius: 15px;
+          margin-left: 20%;
+          clear: both;
+          max-width: 500px;
+          float: right;
+          list-style-type: none
+
+      }
+      .you:after,
+      .you:before {
+          left: 100%;
+          top: 50%;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+      }
+      .you:after {
+          border-color: rgba(133, 226, 73, 0);
+          border-left-color: #85e249;
+          border-width: 7px;
+          margin-top: -7px;
+      }
+      .you:before {
+          border-color: rgba(119, 119, 119, 0);
+          border-left-color: #777;
+          border-width: 8px;
+          margin-top: -8px;
+      }
+
+      /*******************************
+      * 割り込みを解除
+      ********************************/
+      .clear_balloon{
+        clear: both;
+      }
+
       html {
       height: 100%;
       margin: 0;
@@ -23,19 +117,21 @@ html
       overflow: auto;
       }
       #header {
-       background-color: #ccc;
+       background-color: #132941;
        position: fixed;            /* ヘッダーの固定 */
        top: 0px;                   /* 位置(上0px) */
        left: 0px;                  /* 位置(右0px) */
        width: 100%;                /* 横幅100%　*/
-       height: 45px;              /* 縦幅140px */
+       height: 48px;              /* 縦幅140px */
        z-index: 5;
        box-shadow:2px 2px 1px #b4bfc1;
       }
+
       #head-txt{
            /* 表示領域を白枠で囲う */
+       color:#ffffff;
        height: 100%;              /* 縦の表示領域はheader-bkと同じ */
-       width: 960px;              /* 横の幅970px */
+       width: 500px;              /* 横の幅970px */
        margin: auto;              /* 中央揃え */
        text-align: center;
        z-index: 5;
@@ -53,18 +149,46 @@ html
       #middle {
       }
       #left_frame {
+
       float: left;
       width: 20%;
       }
       #right_frame {
+      background:#81BEF7
       }
       .spacer {
-      height: 10000px;
+      height: 5000px;
       }
       #in {
       position: relative;
       left: 200px;
+
+      margin: auto;
+
       }
+
+      #msg_input{
+      border:0;
+      padding:7px;
+      font-size:1.3em;
+      font-family:Arial, sans-serif;
+      color:#aaa;
+      border:solid 1px #ccc;
+      margin:0 0 10px;
+      width:300px;
+      }
+      #sub{
+      border:solid 1px #ccc;
+      padding:7px 7px;
+      margin:0 0 20px;
+      font-family:Arial, sans-serif;
+      font-size:1.2em;
+      text-transform:uppercase;
+      font-weight:bold;
+      color:#333;
+      cursor:pointer;
+      }
+
       #user-list{
       padding: 0;
       position: relative;
@@ -78,32 +202,58 @@ html
       padding: 0.5em;
       list-style-type: none!important;/*ポチ消す*/
       }
+      li.notice {
+        position: relative;
+        list-style-type: none!important;/*ポチ消す*/
+        padding: 0.5em 0.5em 0.5em 0.5em;
+        margin-bottom: 15px;
+        line-height: 3;
+        background: #2EFE9A;
+        vertical-align: middle;
+        color: #505050;
+        border-radius: 15px 0px 0px 15px;/*左側の角丸く*/
+        clear: both;
+      }
+      li.notice-out {
+        position: relative;
+        list-style-type: none!important;/*ポチ消す*/
+        padding: 0.5em 0.5em 0.5em 0.5em;
+        margin-bottom: 15px;
+        line-height: 3;
+        background: #E95987;
+        vertical-align: middle;
+        color: #505050;
+        border-radius: 15px 0px 0px 15px;/*左側の角丸く*/
+        clear: both;
+      }
+
 
   body
 
     block content
     #header.item
      #head-pos
-      #head-txt ここだよ
+      #head-txt
 
-    #middle.item
+    #middle.item.drag
       #left_frame.item
         ul#user-list
 
 
         .spacer
+
       #right_frame.item
-         script(src='/socket.io/socket.io.js')
-         script(src='/javascripts/cliant.js')
 
-         #footer.item
-           #in
-             input#msg_input(type='text', style='width:500px;')
-             input#sub(type="submit",value="送信")
+        ul#chat
+
+        #footer.item
+          #in
+            input#msg_input(type='text', style='width:500px;',placeholder='メッセージを入力')
+            input#sub(type="submit",value="送信")
 
 
 
-    .remodal(data-remodal-id='modal', role='dialog', aria-labelledby='modal1Title', aria-describedby='modal1Desc')
+    .remodal(data-remodal-id='modal', role='dialog', aria-labelledby='modal1Title', aria-describedby='modal1Desc',data-remodal-options="closeOnOutsideClick: false")
       div
         h2#modal1Title ユーザー名を設定してください
         input#modal1Desc(type='text',style='width:400px;')
