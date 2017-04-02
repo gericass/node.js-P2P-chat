@@ -33,10 +33,13 @@ $(function(){
             // Select connection handler.
             c.on('data', function(data) {
                 $('<li class="other">'+connectedUserName[c.peer]+': '+data+'</li>').appendTo('#chat');
+                //scrl();
             });
             c.on('close', function() {
                 //alert(connectedUserName[c.peer] + ' が退出しました');
                 $('<li class="notice-out">' + connectedUserName[c.peer] + ' が退出しました</li>').appendTo('#chat');
+                scrl();
+
                 c.destroy();
                 delete connectedPeers[c.peer];
                 delete connectedUserName[c.peer];
@@ -48,8 +51,8 @@ $(function(){
                     var dataView = new Uint8Array(data);
                     var dataBlob = new Blob([dataView]);
                     var url = window.URL.createObjectURL(dataBlob);
-                    $('<li class="other">'+connectedUserName[c.peer]+': <a target="_blank" href="' + url + '">ファイル</a>を送信しました</li>').appendTo('#chat')
-                　　
+                    $('<li class="other">'+connectedUserName[c.peer]+': <a target="_blank" href="' + url + '">ファイル</a>を送信しました</li>').appendTo('#chat');
+                    //scrl();
                 }
             });
         }else if (c.label === 'greeting') {
@@ -78,7 +81,10 @@ $(function(){
 
 
             $('<li class="notice">'+c.metadata+' と接続を開始しました</li>').appendTo('#chat');
+            //scrl();
+
         }
+        scrl();
     }
 
 
@@ -144,6 +150,7 @@ $(function(){
 
 
             $('<li class="notice">' + data.un + ' と接続を開始しました</li>').appendTo('#chat');
+            scrl();
         }
     });
 
@@ -193,6 +200,7 @@ $(function(){
             }
         });
         $('<li class="you">ファイルを送信しました</li>').appendTo('#chat');
+        scrl();
     });
     function doNothing(e){
         e.preventDefault();
@@ -211,6 +219,7 @@ $(function(){
            }
         });
         $('<li class="you">'+msg+'</li>').appendTo('#chat');
+        scrl();
         $('#msg_input').val('');
         return false;
     });
@@ -226,8 +235,12 @@ $(function(){
             }
         }
     }
-
-
+    /*------------スクロール----------------*/
+    function scrl(){
+        $('#right_frame').delay(100).animate({
+            scrollTop: $(document).height()
+        },800);
+    }
 
     /*-------------------以下ポップアップ関連---------------*/
 

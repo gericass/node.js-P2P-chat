@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="065d0d6b-0f3b-4be1-94be-f58424a04e2e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layout.jade" afterPath="$PROJECT_DIR$/views/layout.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cliant.js" afterPath="$PROJECT_DIR$/public/javascripts/cliant.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,24 +62,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cliant.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="cliant.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/cliant.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="8" column="60" lean-forward="false" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
               <folding>
                 <element signature="e#0#45#0" expanded="false" />
-                <marker date="1491115634729" expanded="true" signature="3089:3114" ph="..." />
-                <marker date="1491115634729" expanded="true" signature="5183:5208" ph="..." />
+                <marker date="1491119604110" expanded="true" signature="3191:3216" ph="..." />
+                <marker date="1491119604110" expanded="true" signature="5305:5330" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout.jade" pinned="false" current-in-tab="true">
+      <file leaf-file-name="layout.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/layout.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
+            <state relative-caret-position="-3806">
               <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
               <folding />
             </state>
@@ -134,8 +135,8 @@
       <find>passsub</find>
       <find>other</find>
       <find>が</find>
-      <find>notice</find>
       <find>error</find>
+      <find>notice</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -156,8 +157,8 @@
         <option value="$PROJECT_DIR$/Procfile.txt" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/bin/www" />
-        <option value="$PROJECT_DIR$/public/javascripts/cliant.js" />
         <option value="$PROJECT_DIR$/views/layout.jade" />
+        <option value="$PROJECT_DIR$/public/javascripts/cliant.js" />
       </list>
     </option>
   </component>
@@ -996,12 +997,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1490683223789</updated>
-      <workItem from="1490683245687" duration="143617000" />
+      <workItem from="1490683245687" duration="146059000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143617000" />
+    <option name="totallyTimeSpent" value="146059000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1130,23 +1131,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/layout.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3806">
+          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/cliant.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="8" column="60" lean-forward="false" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
           <folding>
             <element signature="e#0#45#0" expanded="false" />
-            <marker date="1491115634729" expanded="true" signature="3089:3114" ph="..." />
-            <marker date="1491115634729" expanded="true" signature="5183:5208" ph="..." />
+            <marker date="1491119604110" expanded="true" signature="3191:3216" ph="..." />
+            <marker date="1491119604110" expanded="true" signature="5305:5330" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layout.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
