@@ -33,7 +33,7 @@ $(function(){
             // Select connection handler.
             c.on('data', function(data) {
                 $('<li class="other">'+connectedUserName[c.peer]+': '+data+'</li>').appendTo('#chat');
-                //scrl();
+                scrl();
             });
             c.on('close', function() {
                 //alert(connectedUserName[c.peer] + ' が退出しました');
@@ -52,7 +52,7 @@ $(function(){
                     var dataBlob = new Blob([dataView]);
                     var url = window.URL.createObjectURL(dataBlob);
                     $('<li class="other">'+connectedUserName[c.peer]+': <a target="_blank" href="' + url + '">ファイル</a>を送信しました</li>').appendTo('#chat');
-                    //scrl();
+                    scrl();
                 }
             });
         }else if (c.label === 'greeting') {
@@ -81,10 +81,10 @@ $(function(){
 
 
             $('<li class="notice">'+c.metadata+' と接続を開始しました</li>').appendTo('#chat');
-            //scrl();
+            scrl();
 
         }
-        scrl();
+        //scrl();
     }
 
 
