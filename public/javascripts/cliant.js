@@ -20,7 +20,7 @@ $(function(){
     var peer = new Peer({
         // Set API key for cloud server (you don't need this if you're running your
         // own.
-        key: '57d5632a-af3b-487b-9e3e-f7c20777e57a'
+        key: ''
         // Set highest debug level (log everything!)
     });
 
